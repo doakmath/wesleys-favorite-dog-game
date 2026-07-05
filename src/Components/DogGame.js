@@ -30,29 +30,34 @@ const DogGame = () => {
   }, []);
 
   const fetchDogData = async () => {
-    const url =
-      "https://api.thedogapi.com/v1/images/search?limit=6&has_breeds=1";
+  const url = "https://api.thedogapi.com/v1/images/search?limit=6";
+
+  try {
     const response = await fetch(url);
-    try {
-      if (response.ok) {
-        const data = await response.json();
-        setChoice1(data[0].url);
-        setChoice2(data[1].url);
-        setChoice3(data[2].url);
-        setChoice4(data[3].url);
-        setChoice5(data[4].url);
-        setChoice6(data[5].url);
-        setBreed1(data[0].breeds?.[0]?.name || "Breed unknown");
-        setBreed2(data[1].breeds?.[0]?.name || "Breed unknown");
-        setBreed3(data[2].breeds?.[0]?.name || "Breed unknown");
-        setBreed4(data[3].breeds?.[0]?.name || "Breed unknown");
-        setBreed5(data[4].breeds?.[0]?.name || "Breed unknown");
-        setBreed6(data[5].breeds?.[0]?.name || "Breed unknown");
-      }
-    } catch (error) {
-      console.error("error retrieving api data", error);
+
+    if (response.ok) {
+      const data = await response.json();
+
+      console.log("Dog API data:", data);
+
+      setChoice1(data[0].url);
+      setChoice2(data[1].url);
+      setChoice3(data[2].url);
+      setChoice4(data[3].url);
+      setChoice5(data[4].url);
+      setChoice6(data[5].url);
+
+      setBreed1("Mystery breed");
+      setBreed2("Mystery breed");
+      setBreed3("Mystery breed");
+      setBreed4("Mystery breed");
+      setBreed5("Mystery breed");
+      setBreed6("Mystery breed");
     }
-  };
+  } catch (error) {
+    console.error("error retrieving api data", error);
+  }
+};
 
   const increaseCounter = () => {
     setCounter(counter + 1);
