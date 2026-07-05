@@ -95,7 +95,7 @@ const DogGame = () => {
   return (
     <>
       <div className="game-container">
-        <h1 className="game-title">Wesley's Dog Game</h1>
+        <h1 className="game-title">Wesley's Favorite Dog Game</h1>
         {counter === 0 && (
           <div>
             <button
