@@ -30,29 +30,58 @@ const DogGame = () => {
   }, []);
 
   const fetchDogData = async () => {
-  const url = "https://api.thedogapi.com/v1/images/search?limit=6";
+  const apiKey = "live_2FBczWeKHFILBa1gYqDBX1uSB0gqCwSxbSzNfW9Ge74stZIeNeVPBQijYF5heZH4";
 
   try {
-    const response = await fetch(url);
+    const breedResponse = await fetch("https://api.thedogapi.com/v1/breeds", {
+      headers: {
+        "x-api-key": apiKey,
+      },
+    });
 
-    if (response.ok) {
-      const data = await response.json();
+    if (breedResponse.ok) {
+      const breeds = await breedResponse.json();
 
-      console.log("Dog API data:", data);
+      const selectedBreeds = breeds
+        .filter((breed) => breed.id && breed.name)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 6);
 
-      setChoice1(data[0].url);
-      setChoice2(data[1].url);
-      setChoice3(data[2].url);
-      setChoice4(data[3].url);
-      setChoice5(data[4].url);
-      setChoice6(data[5].url);
+      const dogs = await Promise.all(
+        selectedBreeds.map(async (breed) => {
+          const imageResponse = await fetch(
+            `https://api.thedogapi.com/v1/images/search?breed_ids=${breed.id}&limit=1`,
+            {
+              headers: {
+                "x-api-key": apiKey,
+              },
+            }
+          );
 
-      setBreed1("Mystery breed");
-      setBreed2("Mystery breed");
-      setBreed3("Mystery breed");
-      setBreed4("Mystery breed");
-      setBreed5("Mystery breed");
-      setBreed6("Mystery breed");
+          const imageData = await imageResponse.json();
+
+          return {
+            name: breed.name,
+            imageUrl: imageData[0]?.url || "",
+          };
+        })
+      );
+
+      console.log("Dogs with breeds and images:", dogs);
+
+      setChoice1(dogs[0].imageUrl);
+      setChoice2(dogs[1].imageUrl);
+      setChoice3(dogs[2].imageUrl);
+      setChoice4(dogs[3].imageUrl);
+      setChoice5(dogs[4].imageUrl);
+      setChoice6(dogs[5].imageUrl);
+
+      setBreed1(dogs[0].name);
+      setBreed2(dogs[1].name);
+      setBreed3(dogs[2].name);
+      setBreed4(dogs[3].name);
+      setBreed5(dogs[4].name);
+      setBreed6(dogs[5].name);
     }
   } catch (error) {
     console.error("error retrieving api data", error);
