@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wesleys-favorite-dog-game/static/css/main.cbb5d1ea.css",
-    "main.js": "/wesleys-favorite-dog-game/static/js/main.e0acf9cd.js",
+    "main.js": "/wesleys-favorite-dog-game/static/js/main.1c9bb0bc.js",
     "static/media/background2.webp": "/wesleys-favorite-dog-game/static/media/background2.71448e3329f3c8954407.webp",
     "index.html": "/wesleys-favorite-dog-game/index.html",
     "main.cbb5d1ea.css.map": "/wesleys-favorite-dog-game/static/css/main.cbb5d1ea.css.map",
-    "main.e0acf9cd.js.map": "/wesleys-favorite-dog-game/static/js/main.e0acf9cd.js.map"
+    "main.1c9bb0bc.js.map": "/wesleys-favorite-dog-game/static/js/main.1c9bb0bc.js.map"
   },
   "entrypoints": [
     "static/css/main.cbb5d1ea.css",
-    "static/js/main.e0acf9cd.js"
+    "static/js/main.1c9bb0bc.js"
   ]
 }
