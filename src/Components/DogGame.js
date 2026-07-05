@@ -21,17 +21,17 @@ const DogGame = () => {
     }, [])
 
     const fetchDogData = async () => {
-        const url = 'https://dog.ceo/api/breeds/image/random/6';
+        const url = 'https://api.thedogapi.com/v1/images/search?limit=6';
         const response = await fetch(url);
         try {
             if (response.ok) {
                 const data = await response.json();
-                setChoice1(data.message[0]);
-                setChoice2(data.message[1]);
-                setChoice3(data.message[2]);
-                setChoice4(data.message[3]);
-                setChoice5(data.message[4]);
-                setChoice6(data.message[5]);
+                setChoice1(data[0].url);
+                setChoice2(data[1].url);
+                setChoice3(data[2].url);
+                setChoice4(data[3].url);
+                setChoice5(data[4].url);
+                setChoice6(data[5].url);
             }
         } catch (error) {
             console.error("error retrieving api data", error);
